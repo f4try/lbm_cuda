@@ -14,6 +14,9 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="opengl3_shader.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shader.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F96DC8B3-224E-4EDC-BF00-16E5A60D505B}</ProjectGuid>
     <RootNamespace>cuda_test</RootNamespace>
