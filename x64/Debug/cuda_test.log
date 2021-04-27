@@ -1,0 +1,6 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(chapter4_3_julia_cpu.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  opengl3_shader.cpp
+C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\opengl3_shader.cpp(90,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\opengl3_shader.cpp(99,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\opengl3_shader.cpp(100,30): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  cuda_test.vcxproj -> C:\Users\zongz\work\taichi\lbm\cuda_test\x64\Debug\cuda_test.exe

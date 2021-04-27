@@ -1,0 +1,86 @@
+#include <gl/freeglut.h>
+
+class CPUAnimBitmap {
+private:
+	unsigned char* pixels;
+	int width, height;
+	void* dataBlock;
+	void (*fAnim)(void*, int);
+	void (*animExit)(void*);
+	void (*clickDrag)(void*, int, int, int, int);
+	int dragStartX, dragStartY;
+public:
+	CPUAnimBitmap(int w, int h, void* d = NULL) {
+		width = w;
+		height = h;
+		pixels = new unsigned char[width * height * 4];
+		dataBlock = d;
+		clickDrag = NULL;
+	}
+	~CPUAnimBitmap() {
+		delete[] pixels;
+	}
+	unsigned char* get_ptr() const { return pixels; }
+	long image_size() const { return width * height * 4; }
+	void click_drag(void(*f)(void*, int, int, int, int)) {
+		clickDrag = f;
+	}
+	static CPUAnimBitmap** get_bitmap_ptr() {
+		static CPUAnimBitmap* gBitmap;
+		return &gBitmap;
+	}
+	static void mouse_func(int button, int state, int mx, int my) {
+		if (button == GLUT_LEFT_BUTTON) {
+			CPUAnimBitmap* bitmap = *(get_bitmap_ptr());
+			if (state == GLUT_DOWN) {
+				bitmap->dragStartX = mx;
+				bitmap->dragStartY = my;
+			}
+			else if(state==GLUT_UP){
+				bitmap->clickDrag(bitmap->dataBlock,
+					bitmap->dragStartX,
+					bitmap->dragStartY,
+					mx, my);
+			}
+		}
+	}
+	static void idle_func(void) {
+		static int ticks = 1;
+		CPUAnimBitmap* bitmap = *(get_bitmap_ptr());
+		bitmap->fAnim(bitmap->dataBlock, ticks++);
+		glutPostRedisplay();
+	}
+	static void Key(unsigned char key, int x, int y) {
+		switch (key) {
+		case 27:
+			CPUAnimBitmap * bitmap = *(get_bitmap_ptr());
+			bitmap->animExit(bitmap->dataBlock);
+			exit(0);
+		}
+	}
+	static void Draw() {
+		CPUAnimBitmap* bitmap = *(get_bitmap_ptr());
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDrawPixels(bitmap->width, bitmap->height, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->pixels);
+		glutSwapBuffers();
+	}
+	void anim_and_exit(void(*f)(void*, int), void(*e)(void*)) {
+		CPUAnimBitmap** bitmap = get_bitmap_ptr();
+		*bitmap = this;
+		fAnim = f;
+		animExit = e;
+		int c = 1;
+		char* dummy = "";
+		glutInit(&c, &dummy);
+		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+		glutInitWindowSize(width + 20,height+20);
+		glutCreateWindow("bitmap");
+		glutKeyboardFunc(Key);
+		glutDisplayFunc(Draw);
+		if (clickDrag != NULL)
+			glutMouseFunc(mouse_func);
+		glutIdleFunc(idle_func);
+		glutMainLoop();
+	}
+};
