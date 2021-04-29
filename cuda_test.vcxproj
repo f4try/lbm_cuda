@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
-    <ClCompile Include="opengl3_shader.cpp" />
+    <ClCompile Include="opengl4_texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader.h" />

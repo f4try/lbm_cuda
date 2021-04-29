@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <math.h>
+#include "shader.h"
 #define PI 3.1415927
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
@@ -11,23 +12,23 @@ void processInput(GLFWwindow* window) {
 		glfwSetWindowShouldClose(window, true);
 	}
 }
-const char* vertexShaderSource = "#version 330 core\n"
-"layout (location =0) in vec3 aPos;\n"
-"layout (location =1) in vec3 aColor;\n"
-"out vec3 ourColor;\n"
-"void main()\n"
-"{\n"
-"	gl_Position = vec4(aPos,1.0);\n"
-//"	vertexColor = vec4(0.5,0.0,0.0,1.0);\n"
-	"ourColor = aColor;\n"
-"}\0";
-const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"in vec3 ourColor;\n"
-//"uniform vec4 ourColor;\n"
-"void main(){\n"
-"	FragColor=vec4(ourColor,1.0f);\n"
-"}\0";
+//const char* vertexShaderSource = "#version 330 core\n"
+//"layout (location =0) in vec3 aPos;\n"
+//"layout (location =1) in vec3 aColor;\n"
+//"out vec3 ourColor;\n"
+//"void main()\n"
+//"{\n"
+//"	gl_Position = vec4(aPos,1.0);\n"
+////"	vertexColor = vec4(0.5,0.0,0.0,1.0);\n"
+//	"ourColor = aColor;\n"
+//"}\0";
+//const char* fragmentShaderSource = "#version 330 core\n"
+//"out vec4 FragColor;\n"
+//"in vec3 ourColor;\n"
+////"uniform vec4 ourColor;\n"
+//"void main(){\n"
+//"	FragColor=vec4(ourColor,1.0f);\n"
+//"}\0";
 int main() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -52,26 +53,27 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STREAM_DRAW);
 	
-	unsigned int vertexShader;
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-	unsigned int fragmentShader;
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-	unsigned int shaderProgram;
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	/*float timeValue = glfwGetTime();
-	float greenValue = (sin(timeValue / 2.0f)) + 0.5f;
-	int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-	glUseProgram(shaderProgram);
-	glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);*/
-	glUseProgram(shaderProgram);
-
+	//unsigned int vertexShader;
+	//vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	//glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	//glCompileShader(vertexShader);
+	//unsigned int fragmentShader;
+	//fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	//glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	//glCompileShader(fragmentShader);
+	//unsigned int shaderProgram;
+	//shaderProgram = glCreateProgram();
+	//glAttachShader(shaderProgram, vertexShader);
+	//glAttachShader(shaderProgram, fragmentShader);
+	//glLinkProgram(shaderProgram);
+	///*float timeValue = glfwGetTime();
+	//float greenValue = (sin(timeValue / 2.0f)) + 0.5f;
+	//int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+	//glUseProgram(shaderProgram);
+	//glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);*/
+	//glUseProgram(shaderProgram);
+	Shader ourShader("VertexShader.txt", "FragmentShader.txt");
+	ourShader.use();
 	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	//glEnableVertexAttribArray(0);
 	unsigned int VAO;
@@ -92,7 +94,8 @@ int main() {
 		float greenValue = (sin(timeValue / 3.0f)) + 0.5f;
 		float blueValue = (cos(timeValue / 2.0f)) + 0.5f;
 		//int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-		glUseProgram(shaderProgram);
+		//glUseProgram(shaderProgram);
+		ourShader.use();
 		//glUniform4f(vertexColorLocation, redValue, greenValue, blueValue, 1.0f);
 		glBindVertexArray(VAO);
 		for (int i = 0; i < 3; i++) {
