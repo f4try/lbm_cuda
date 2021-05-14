@@ -1,5 +1,12 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(chapter4_3_julia_cpu.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  opengl6_coord.cpp
-C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\shader.h(3,10): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
-C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\opengl6_coord.cpp(123,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  Compiling CUDA source file lbm_solver_xct.cu...
+  
+  C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\HostX86\x64" -x cu   -I"C:\ProgramData\NVIDIA Corporation\CUDA Samples\v11.1\common\inc" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static -Xcompiler "/wd 4819" -g   -DWIN32 -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MTd " -o x64\Debug\lbm_solver_xct.cu.obj "C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\lbm_solver_xct.cu" 
+C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\cpu_anim.h(74): warning : conversion from a string literal to "char *" is deprecated
+  
+C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\cpu_anim.h(74): warning : conversion from a string literal to "char *" is deprecated
+  
+  lbm_solver_xct.cu
+C:\Users\zongz\work\taichi\lbm\cuda_test\cuda_test\gif.h(380): warning C4334: “<<”: 32 位移位的结果被隐式转换为 64 位(是否希望进行 64 位移位?)
+C:/Users/zongz/work/taichi/lbm/cuda_test/cuda_test/lbm_solver_xct.cu(394): warning C4305: “初始化”: 从“double”到“float”截断
   cuda_test.vcxproj -> C:\Users\zongz\work\taichi\lbm\cuda_test\x64\Debug\cuda_test.exe
